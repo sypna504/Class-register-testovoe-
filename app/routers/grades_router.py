@@ -1,36 +1,22 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from app.services.grades_service import GradeServices
-from app.schemas.grades_schema import FileSuccesfullUploaded, StudentsTwosResponse
-from app.exceptions import (
-    InvalidFileFormatError,
-    IncorrectFileColumnsError,
-    IncorrectStudentColumnError,
-    IncorrectGradeRangeError,
-    EmptyCsvFileError,
-    AppError,
-)
+from app.grades_service import GradesService
+from app.schemas.grades_schema import FileUploadedResponse, StudentsTwosResponse
+from app.exceptions import AppError
+"""файл с http-эндпоинтами для работы с оценками студентов
+здесь описаны маршруты для загрузки csv файла и получения студентов
+по количеству 2"""
 
+"""роутер для эндпоинтов"""
 router = APIRouter()
 
 @router.post(path="/upload-grades",
-            response_model=FileSuccesfullUploaded)
+            response_model=FileUploadedResponse)
 
 async def upload_grades(file:UploadFile = File(...)):
-    try:
-        return GradeServices().grades_from_csv(file)
-    except InvalidFileFormatError as ex:
-        raise HTTPException(status_code=400, detail=ex.message)
+    """принимает csv файл проверяет его и сохраняет в базу"""
     
-    except EmptyCsvFileError as ex:
-        raise HTTPException(status_code=400, detail=ex.message)
-    except IncorrectFileColumnsError as ex:
-        raise HTTPException(status_code=422, detail=ex.message)
-
-    except IncorrectStudentColumnError as ex:
-        raise HTTPException(status_code=500, detail=ex.message)
-
-    except IncorrectGradeRangeError as ex:
-        raise HTTPException(status_code=500, detail=ex.message)
+    try:
+        return GradesService().grades_from_csv(file)
     
     except AppError as ex:
         raise HTTPException(
@@ -41,16 +27,19 @@ async def upload_grades(file:UploadFile = File(...)):
                 "code": ex.error_code,
             },
         )
+    
+    except Exception as ex:
+        raise HTTPException(status_code=422, detail=str(ex))
+    
         
 
 @router.get(path="/students/more-than-3-twos",
             response_model=StudentsTwosResponse)
 async def get_more_than_3_twos():
+    """возвращает студентов у которых болше трех 2"""
+
     try:
-        return GradeServices().get_students_with_twos(more_than=3)
-    
-    except Exception as ex:
-        raise HTTPException(status_code=500, detail=ex.message)
+        return GradesService().get_students_with_twos(more_than=3)
     
     except AppError as ex:
         raise HTTPException(
@@ -61,17 +50,19 @@ async def get_more_than_3_twos():
                 "code": ex.error_code,
             },
         )
+    
+    except Exception as ex:
+        raise HTTPException(status_code=422, detail=str(ex))
     
 
 
 @router.get(path="/students/less-than-5-twos",
             response_model=StudentsTwosResponse)
 async def get_less_than_5_twos():
+    """возвращает студентов у которых меньше пяти 2"""
+
     try:
-        return GradeServices().get_students_with_twos(les_than=5)
-    
-    except Exception as ex:
-        raise HTTPException(status_code=500, detail=ex.message)
+        return GradesService().get_students_with_twos(les_than=5)
     
     except AppError as ex:
         raise HTTPException(
@@ -82,3 +73,6 @@ async def get_less_than_5_twos():
                 "code": ex.error_code,
             },
         )
+    
+    except Exception as ex:
+        raise HTTPException(status_code=422, detail=str(ex))

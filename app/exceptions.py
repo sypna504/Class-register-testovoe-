@@ -1,8 +1,6 @@
 class AppError(Exception):
-    """
-    базовая ошибка приложения
-    от неё наследуются все остальные пользовательские ошибки
-    """
+    """базовая ошибка приложения
+    от неё наследуются все остальные пользовательские ошибки"""
 
     def __init__(
         self,
@@ -17,10 +15,8 @@ class AppError(Exception):
 
 
 class InvalidFileFormatError(AppError):
-    """
-    ошибка неправильного формата файла
-    например пользователь загрузил не .csv файл
-    """
+    """ошибка неправильного формата файла
+    например пользователь загрузил не .csv файл"""
 
     def __init__(self, message: str = "only .csv files are allowed"):
         super().__init__(
@@ -31,10 +27,8 @@ class InvalidFileFormatError(AppError):
 
 
 class IncorrectFileColumnsError(AppError):
-    """
-    ошибка неправильных колонок в CSV
-    например, нет колонок student или grade
-    """
+    """ошибка неправильных колонок в CSV
+    например, нет колонок student или grade"""
 
     def __init__(self, missing_columns: list[str]):
         message = f"missing required columns: {', '.join(missing_columns)}"
@@ -49,10 +43,8 @@ class IncorrectFileColumnsError(AppError):
 
 
 class IncorrectStudentColumnError(AppError):
-    """
-    ошибка в колонке student
-    например, имя студента пустое
-    """
+    """ошибка в колонке student
+    например, имя студента пустое"""
 
     def __init__(self, message: str = "student column contains invalid values"):
         super().__init__(
@@ -63,10 +55,8 @@ class IncorrectStudentColumnError(AppError):
 
 
 class IncorrectGradeRangeError(AppError):
-    """
-    ошибка диапазона оценок
-    например, grade меньше 0 или больше 5
-    """
+    """ошибка диапазона оценок
+    например, grade меньше 0 или больше 5"""
 
     def __init__(self, message: str = "grade must be between 0 and 5"):
         super().__init__(
@@ -77,10 +67,8 @@ class IncorrectGradeRangeError(AppError):
 
 
 class IncorrectGradeTypeError(AppError):
-    """
-    ошибка типа оценки
-    например, в grade лежит текст вместо числа
-    """
+    """ошибка типа оценки
+    например, в grade лежит текст вместо числа"""
 
     def __init__(self, message: str = "grade must be an integer"):
         super().__init__(
@@ -90,9 +78,7 @@ class IncorrectGradeTypeError(AppError):
         )
 
 class EmptyCsvFileError(AppError):
-    """
-    ошибка пустого CSV-файла
-    """
+    """ошибка пустого CSV-файла"""
 
     def __init__(self, message: str = "csv file is empty"):
         super().__init__(
@@ -103,9 +89,7 @@ class EmptyCsvFileError(AppError):
 
 
 class DatabaseOperationError(AppError):
-    """
-    ошибка при работе с базой данных
-    """
+    """ошибка при работе с базой данных"""
 
     def __init__(self, message: str = "database operation failed"):
         super().__init__(
@@ -115,10 +99,7 @@ class DatabaseOperationError(AppError):
         )
     
 class MissingValuesError(AppError):
-    """
-    ошибка пропущенны значений
-    например, в grade или в student есть какие то пропущенные значения
-    """
+    """ошибка пропущенны значенийнапример, в grade или в student есть какие то пропущенные значения"""
 
     def __init__(self, message: str = "missing values"):
         super().__init__(

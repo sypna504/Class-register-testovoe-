@@ -1,0 +1,10 @@
+Тут собранны искуственно сделанные файлы для тестирования функционала
+
+not_csv_file.txt - проверить ошибку неправильного формата
+wrong_extension.cvs - файл с опечаткой .cvs, тоже должен не пройти
+valid_grades.csv - нормальный файл
+missing_columns.csv - нет колонок student, grade
+invalid_grade_range.csv - оценки 10 и -1
+missing_values.csv - пропущены значения
+invalid_grade_type.csv - оценка abc
+empty_grades.csv - пустой файл

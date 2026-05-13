@@ -1,12 +1,10 @@
-from fastapi import FastAPI, UploadFile, File
-from app.db.connections import Connection
+from fastapi import FastAPI
 from app.routers.grades_router import router 
 
-app = FastAPI(
-    title="Grades API",
-    version="1.0.0",
-)
+"""наше приложение"""
+app = FastAPI()
 
+"""роутер"""
 app.include_router(router)
 
 
