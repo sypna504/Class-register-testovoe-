@@ -30,15 +30,42 @@ anna,5
 - `422` - неправильные данные внутри csv
 - `500` - ошибка сервера или базы данных
 
-## архитектура
+## архитектура 
+
 ```text
-app/
-├── main.py
-├── exceptions.py
-├── db/
-├── parsers/
-├── repositories/
-├── routers/
-├── schemas/
-├── services/
-└── validators/
+Class-register-testovoe-/
+├── app/
+│   ├── main.py
+│   ├── exceptions.py
+│   ├── db/
+│   │   ├── connections.py
+│   │   └── grades_repository.py
+│   ├── parsers/
+│   │   └── csv_parser.py
+│   ├── routers/
+│   │   └── grades_router.py
+│   ├── schemas/
+│   │   └── grades_schema.py
+│   ├── grades_service.py
+│   └── grades_validator.py
+├── files_for_tests/
+│   ├── valid_grades.csv
+│   ├── missing_columns.csv
+│   ├── invalid_grade_range.csv
+│   ├── invalid_grade_type.csv
+│   ├── missing_values.csv
+│   ├── empty_grades.csv
+│   └── test_file.cvs
+├── tests/
+│   └── tests_upload.py
+├── data
+├── .dockerignore
+├── .env
+├── .env.example
+├── .gitignore
+├── constraints.py
+├── Dockerfile
+├── docker-compose.yml
+├── init.sql
+├── requirements.txt
+└── README.md
