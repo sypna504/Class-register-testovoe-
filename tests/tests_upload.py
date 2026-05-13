@@ -1,9 +1,7 @@
 from pathlib import Path
 from fastapi.testclient import TestClient
 from app.main import app
-# from .constraints import TESTING_FILES_DIR
-from pathlib import Path
-TESTING_FILES_DIR = Path("files_for_tests")
+from constraints import TESTING_FILES_DIR
 
 
 client = TestClient(app)
