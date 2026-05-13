@@ -1,7 +1,9 @@
 from pathlib import Path
 from fastapi.testclient import TestClient
 from app.main import app
-from constraints import TESTING_FILES_DIR
+# from .constraints import TESTING_FILES_DIR
+from pathlib import Path
+TESTING_FILES_DIR = Path("files_for_tests")
 
 
 client = TestClient(app)
@@ -15,6 +17,13 @@ def upload_file(filename):
             "/upload-grades",
             files={"file": (filename, file, "text/csv")},
         )
+
+def test_valid_grades_file():
+    response = upload_file("valid_grades.csv")
+
+    print(response.json())
+
+    assert response.status_code == 200
     
 def test_missing_columns_file():
     response = upload_file("missing_columns.csv")

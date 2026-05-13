@@ -26,9 +26,9 @@ class Validator:
         вызывает IncorrectGradeTypeError если тип неправильный"""
 
         try:
-            df["grade"] = df["grade"].astype("int")
-        except IncorrectGradeTypeError as e:
-            raise e
+            df["grade"] = df["grade"].astype(int)
+        except Exception:
+            raise IncorrectGradeTypeError()
 
     def validate_student_type(self, df) -> None:
         """проверяет что колонка student строка"""
@@ -116,9 +116,7 @@ class GradesService:
                 "count_twos": count_twos,
             })
 
-        return {
-            "students": students,
-        }
+        return students
 
     
 

@@ -19,9 +19,4 @@ class StudentTwosCount(BaseModel):
     full_name: str = Field(description="имя студента")
     count_twos: int = Field(ge=0, description="колличество двоек")
 
-class StudentsTwosResponse(BaseModel):
-    """схема для списка студентво
-    students: список, где каждый студент формата StudentTwosCount"""
-    
-    students: list[StudentTwosCount]
 

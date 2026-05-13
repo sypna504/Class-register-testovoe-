@@ -8,7 +8,7 @@ class Connection:
         self.port=os.getenv("DB_PORT", "5432")
         self.user=os.getenv("DB_USER", "user")
         self.password=os.getenv("DB_PASSWORD", "postgress")
-        self.dbname=os.getenv("DB_NAME", "mood_music") 
+        self.dbname=os.getenv("DB_NAME", "class_register") 
     
     def get_conn(self) -> psycopg2.connect:
         """функция которая возвращает подключение"""

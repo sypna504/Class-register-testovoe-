@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.grades_service import GradesService
-from app.schemas.grades_schema import FileUploadedResponse, StudentsTwosResponse
+from app.schemas.grades_schema import FileUploadedResponse, StudentTwosCount
 from app.exceptions import AppError
 """файл с http-эндпоинтами для работы с оценками студентов
 здесь описаны маршруты для загрузки csv файла и получения студентов
@@ -34,7 +34,7 @@ async def upload_grades(file:UploadFile = File(...)):
         
 
 @router.get(path="/students/more-than-3-twos",
-            response_model=StudentsTwosResponse)
+            response_model=list[StudentTwosCount])
 async def get_more_than_3_twos():
     """возвращает студентов у которых болше трех 2"""
 
@@ -57,7 +57,7 @@ async def get_more_than_3_twos():
 
 
 @router.get(path="/students/less-than-5-twos",
-            response_model=StudentsTwosResponse)
+            response_model=list[StudentTwosCount])
 async def get_less_than_5_twos():
     """возвращает студентов у которых меньше пяти 2"""
 
