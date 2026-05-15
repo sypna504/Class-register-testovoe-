@@ -1,5 +1,7 @@
-fastapi>=0.110
+fastapi==0.135.3
 uvicorn[standard]>=0.29
-psycopg2-binary
-python-multipart
-pandas
+psycopg2-binary==2.9.12
+python-multipart==0.0.28
+pandas==2.3.3
+pytest==8.4.2
+httpx==0.28.1
