@@ -13,8 +13,7 @@ class FileUploadedResponse(BaseModel):
 class StudentTwosCount(BaseModel):
     """схема для одного студента
     full_name: строка
-    count_twos: число, превышающее 0
-    """
+    count_twos: число, превышающее 0"""
 
     full_name: str = Field(description="имя студента")
     count_twos: int = Field(ge=0, description="колличество двоек")

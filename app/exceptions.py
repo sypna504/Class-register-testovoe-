@@ -31,7 +31,7 @@ class IncorrectFileColumnsError(AppError):
     например, нет колонок student или grade"""
 
     def __init__(self, missing_columns: list[str]):
-        message = f"missing required columns: {', '.join(missing_columns)}"
+        message = f"missing required columns: {missing_columns}"
 
         super().__init__(
             message=message,

@@ -12,11 +12,14 @@ class Validator:
         вызывает IncorrectFileColumnsError если их нет
         вызывает IncorrectStudentColumnError если имя студента пустое"""
 
-        if "student" not in df.columns or "grade" not in df.columns:
-            raise IncorrectFileColumnsError(list({"student"}))
+        if "student" not in df.columns and "grade" not in df.columns:
+            raise IncorrectFileColumnsError(list({"student", "grade"}))
         
         if "grade" not in df.columns:
             raise IncorrectFileColumnsError(list({"grade"}))
+
+        if "student" not in df.columns:
+            raise IncorrectFileColumnsError(list({"student"}))
         
         if df["student"].str.strip().eq("").any():
             raise IncorrectStudentColumnError()
@@ -80,12 +83,12 @@ class Validator:
 class GradesService:
     """содержит основуню логику работы приложения"""
 
-    def __init__(self):
-        """создает парсер, валидатор и репозитори для работы сервиса"""
+    def __init__(self, parser: CsvParser, validator: Validator, repository: GradesRepository):
+        """получает парсер, валидатор и репозитори для работы сервиса"""
 
-        self.parser = CsvParser()
-        self.validator = Validator()
-        self.repository = GradesRepository()
+        self.parser = parser
+        self.validator = validator
+        self.repository = repository
     
     def grades_from_csv(self, file):
         """читает csv файл
