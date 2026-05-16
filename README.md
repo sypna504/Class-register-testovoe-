@@ -23,7 +23,7 @@ anna,5
  - скачать зависимости ``` python -m pip install -r requirements.txt```
  - установить pytest python ```-m pip install pytest httpx```
  - поднять бд ```docker compose up``` 
- - запустить тесты python ```-m pytest tests/tests_upload.py -v```
+ - запустить тесты python ```python -m pytest -v``` из корня проекта
 
 ## status codes ошибок
 - `400` - неправильный файл
