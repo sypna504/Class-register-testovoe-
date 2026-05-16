@@ -48,11 +48,16 @@ class GradesRepository:
         conn = Connection().get_conn()
         cur = conn.cursor()
         self.delete_prev_table()
-        for row in rows:
-                cur.execute(
-                    "INSERT INTO grades (student, grade) VALUES (%s, %s)",
-                    row,
-                )
+        """1 чанк 20% всех данных"""
+        chunk_size = int(len(rows)*0.2)
+        for i in range(0, len(rows), chunk_size):
+            chunk = rows[i:i+chunk_size]
+            cur.executemany("INSERT INTO grades (student, grade) VALUES (%s, %s)", chunk)
+        # for row in rows:
+        #     cur.execute(
+        #         "INSERT INTO grades (student, grade) VALUES (%s, %s)",
+        #         row,
+        #     )
             
         conn.commit()
         cur.close()
