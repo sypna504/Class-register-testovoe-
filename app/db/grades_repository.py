@@ -48,8 +48,8 @@ class GradesRepository:
         conn = Connection().get_conn()
         cur = conn.cursor()
         self.delete_prev_table()
-        """1 чанк 20% всех данных"""
-        chunk_size = int(len(rows)*0.2)
+        """1 чанк 20% всех данных макс на случай если файл маленький, там чанки не нужны поэтому просто 1"""
+        chunk_size = max(1, int(len(rows)*0.2))
         for i in range(0, len(rows), chunk_size):
             chunk = rows[i:i+chunk_size]
             cur.executemany("INSERT INTO grades (student, grade) VALUES (%s, %s)", chunk)
