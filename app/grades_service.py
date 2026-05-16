@@ -24,7 +24,7 @@ class Validator:
             raise IncorrectFileColumnsError(list({"student"}))
         
         if df["student"].str.strip().eq("").any():
-            raise IncorrectStudentColumnError(list({"student"}))
+            raise IncorrectStudentColumnError()
         
     @staticmethod
     def validate_grade_type(df) -> None:
