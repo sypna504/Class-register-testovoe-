@@ -3,8 +3,8 @@ from app.exceptions import DatabaseOperationError
 
 class GradesRepository:
     """класс для работы с бд"""
-
-    def get_students_by_twos_count(self, more_than=None | int, les_than=None | int) -> list[tuple[str, int]]:
+    @staticmethod
+    def get_students_by_twos_count( more_than=None | int, les_than=None | int) -> list[tuple[str, int]]:
         """метод подключается к бд
         в зависимости от значения параметра more_than или les_than находит людей с определенным колличеством 2
         при more_than: находит студентов у которых 2 больше чем значение more_than(3)
@@ -29,8 +29,8 @@ class GradesRepository:
             return rows
         except DatabaseOperationError as ex:
             raise DatabaseOperationError(f"ошибка базы даннызх {ex}")
-    
-    def delete_prev_table(self) -> None:
+    @staticmethod
+    def delete_prev_table() -> None:
         """функция для сбрасывания прошлой таблицы
         удаляет прошлую таблицу"""
         conn = Connection().get_conn()

@@ -4,7 +4,7 @@ from app.exceptions import InvalidFileFormatError
 
 class CsvParser:
     """парсер для файлов типа .csv"""
-
+    
     def validate_extension(self, file) -> None:
         """функция для првоерки типа файла"""
 

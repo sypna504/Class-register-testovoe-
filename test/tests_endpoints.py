@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from app.main import app
 from constraints import VALID_TESTING_FILE
-from testss.tests_upload import upload_file
+from test.tests_upload import upload_file
 from app.db.grades_repository import GradesRepository
 
 client = TestClient(app)
