@@ -101,7 +101,7 @@ class DatabaseOperationError(AppError):
 class MissingValuesError(AppError):
     """ошибка пропущенны значенийнапример, в grade или в student есть какие то пропущенные значения"""
 
-    def __init__(self, message: str = "missing values"):
+    def __init__(self, message: str = "there are some missing values in file"):
         super().__init__(
             message=message,
             field_name="values",
